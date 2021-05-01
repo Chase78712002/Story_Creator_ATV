@@ -47,5 +47,6 @@
   - when I scroll down, then 
     - [ ] I can see a list of stories with their status: "in progress" or "completed"
     - [ ] I will see a Go To Top button at the corner.
+    - [ ] (Stretch) I see a bookmark icon near the story. I can click it to add to my list of stories.
   - when I click on the **Create Story** button, then
     - [ ] I'll be directed to another page where I can create a new story.
