@@ -24,14 +24,20 @@ const storiesRoutes = (db) => {
 
   // PUT /stories/:id
   router.put('/:id', (req,res) => {
-    db.query('UPDATE name FROM widgets WHERE id = $1', [req.params.id])
+    db.query('UPDATE users SET name = $1  WHERE id = $2', [req.body.name, req.params.id])
       .then(response => {
-
+        console.log(response.rows);
+        res.end();
       })
   });
 
   // POST /stories/:id
-  router.post('/:id')
+  router.post('/', (req, res) => {
+    db.query(`INSERT INTO users (name) VALUES ($1)`, [req.body.name])
+      .then(response => {
+        res.json({name:req.body.name})
+      })
+  })
 
   return router;
 };
