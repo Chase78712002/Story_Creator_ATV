@@ -3,19 +3,20 @@
 body {
   background-color: #EEE;
   display: flex;
-  // justify-content: space-between;
 
   .container {
     display: flex;
-    width: 50%;
+    flex-direction: column;
+    width: 60%;
     height: 15rem;
     margin-top: 200px;
-    justify-content: center;
+    align-items: center;
 
     .story {
       display: flex;
       background-color: lightsteelblue;
-      width: 80%;
+      width: 40rem;
+      margin-bottom: 2rem;
       padding: 2%;
       flex-direction: column;
       border: solid 2px black;
