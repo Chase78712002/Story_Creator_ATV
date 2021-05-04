@@ -1,40 +1,37 @@
 // See: https://sass-lang.com/
 
-.test-body {
-  display: flex;
-  flex-direction: column;
 
-  #new-story {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color:oldlace;
-    margin-top: 6rem;
-    width: 100%;
+// #new-story {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     background-color:oldlace;
+//     margin-top: 6rem;
+//     width: 100%;
 
-    #story-title {
-      display: flex;
-      height: min-content;
-      width: 50rem;
-      margin-bottom: 1rem;
-    }
+//     #story-content {
+//       display: flex;
+//       height: min-content;
+//       width: 50rem;
+//       margin-bottom: 1rem;
+//     }
 
-    #story-text {
-      display: flex;
-      height: 15rem;
-      width: 50rem;
-    }
+//     #story-text {
+//       display: flex;
+//       height: 15rem;
+//       width: 50rem;
+//     }
 
-    .button {
-      margin: 1rem;
-    }
-  }
-
-}
+//     .button {
+//       margin: 1rem;
+//     }
+//   }
 
 body {
   background-color: #EEE;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 
   a {
     color: black;
@@ -45,7 +42,7 @@ body {
     flex-direction: column;
     width: 60%;
     height: 15rem;
-    margin-top: 200px;
+    margin-top: 2rem;
     align-items: center;
 
     .story {
@@ -68,6 +65,23 @@ body {
         display: flex;
       }
     }
+
+    .story-contribution {
+      display: flex;
+      background-color: lightsteelblue;
+      width: 40rem;
+      margin-bottom: 2rem;
+      padding: 2%;
+      flex-direction: column;
+      border: solid 2px black;
+
+      .contribution-footer {
+        display: flex;
+        align-items: center;
+        border-top: solid 2px black;
+        justify-content: space-between;
+      }
+    }
   }
 
   .filter {
@@ -76,8 +90,8 @@ body {
     flex-direction: column;
     border: solid 2px black;
     margin-top: 200px;
-    margin-left: 5rem;
-    width: 25%;
+    margin-bottom: 2rem;
+    width: 50%;
 
     #filter-title {
       display: flex;
@@ -85,4 +99,41 @@ body {
       border-bottom: solid 2px black;
     }
   }
+
+  #new-story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 6rem;
+    width: 100%;
+
+    #story-content {
+      display: flex;
+      height: min-content;
+      width: 50rem;
+      margin-bottom: 1rem;
+    }
+
+    #story-text {
+      display: flex;
+      height: 15rem;
+      width: 50rem;
+    }
+
+    .button {
+      margin: 1rem;
+    }
+  }
+
+  .view-story {
+    @extend .story;
+    margin-top: 8rem;
+  }
+
+  #new-contribution {
+    @extend #new-story;
+    margin-top: 0%;
+    margin-bottom: 2rem;
+  }
+
 }

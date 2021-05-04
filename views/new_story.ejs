@@ -13,30 +13,28 @@
     <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
-<body class="test-body">
+<body>
+  <!-- <%- include("partials/_header") %> -->
   <nav>
-    <img src="/images/logo.png" id="logo" width="400" height="60">
+    <img src="/images/logo.png" id="logo" width="400" height="60" />
     <div class="nav right">
-      <a href="/new_story">Create Story</a>
-      <i class="fas fa-book-open"></i>
       <a href="/">Home</a>
       <i class="fas fa-book-open"></i>
       <p>USER</p>
     </div>
   </nav>
-
-  <header id="new-story">
+  <div id="new-story">
     <h2>Create a New Story</h2>
     <section>
-      <form action="" method="POST">
-        <textarea name="story-title" id="story-title" placeholder="title" ></textarea>
-        <textarea name="story-text" id="story-text" placeholder="Once upon a time..." ></textarea>
+      <form action="/story" method="POST">
+        <!-- <textarea name="story-title" id="story-title" placeholder="title" ></textarea> -->
+        <textarea name="story" id="story-text" placeholder="Once upon a time..." ></textarea>
         <div>
           <button type="submit" class="button">publish</button>
         </div>
       </form>
     </section>
-  </header>
+  </div>
 
   <main class="container">
 
