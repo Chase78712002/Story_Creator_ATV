@@ -8,7 +8,8 @@ const storiesRoutes = (db) => {
   router.get('/', (req, res) => {
     db.query('SELECT * FROM users;')
       .then(response => {
-        res.json(response.rows);
+        // res.json(response.rows);
+        res.render("story");
       })
       .catch(err => console.log('View stories error', err.message))
   });
