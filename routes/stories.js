@@ -1,4 +1,3 @@
-const { response } = require('express');
 const express = require('express');
 const router = express.Router();
 
@@ -8,7 +7,8 @@ const storiesRoutes = (db) => {
   router.get('/', (req, res) => {
     db.query('SELECT * FROM users;')
       .then(response => {
-        res.json(response.rows);
+        // res.json(response.rows);
+        res.render('story')
       })
       .catch(err => console.log('View stories error', err.message))
   });
@@ -26,9 +26,9 @@ const storiesRoutes = (db) => {
   router.put('/:id', (req,res) => {
     db.query('UPDATE users SET name = $1  WHERE id = $2', [req.body.name, req.params.id])
       .then(response => {
-        console.log(response.rows);
-        res.end();
+        res.json({name:req.body.name, id:req.params.id});
       })
+      .catch(err => console.log('Edit story error', err.message));
   });
 
   // POST /stories/:id
@@ -37,6 +37,7 @@ const storiesRoutes = (db) => {
       .then(response => {
         res.json({name:req.body.name})
       })
+      .catch(err => console.log('Create story erro', err.message));
   })
 
   return router;
