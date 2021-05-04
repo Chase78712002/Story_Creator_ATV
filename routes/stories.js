@@ -1,4 +1,3 @@
-const { response } = require('express');
 const express = require('express');
 const router = express.Router();
 
@@ -6,17 +5,17 @@ const storiesRoutes = (db) => {
 
   // GET /stories
   router.get('/', (req, res) => {
-    db.query('SELECT * FROM users;')
+    db.query('SELECT * FROM stories JOIN writers ON writers.id = writer_id;')
       .then(response => {
-        // res.json(response.rows);
-        res.render("story");
+        res.json(response.rows);
+        // res.render('story')
       })
       .catch(err => console.log('View stories error', err.message))
   });
 
   // GET /stories/:id
   router.get('/:id', (req,res) => {
-    db.query('SELECT * FROM users WHERE id = $1;', [req.params.id])
+    db.query('SELECT * FROM stories WHERE id = $1;', [req.params.id])
       .then(response => {
         res.json(response.rows[0]);
       })
@@ -25,19 +24,20 @@ const storiesRoutes = (db) => {
 
   // PUT /stories/:id
   router.put('/:id', (req,res) => {
-    db.query('UPDATE users SET name = $1  WHERE id = $2', [req.body.name, req.params.id])
+    db.query('UPDATE stories SET story = $1  WHERE id = $2', [req.body.name, req.params.id])
       .then(response => {
-        console.log(response.rows);
-        res.end();
+        res.json({name:req.body.name, id:req.params.id});
       })
+      .catch(err => console.log('Edit story error', err.message));
   });
 
   // POST /stories/:id
   router.post('/', (req, res) => {
-    db.query(`INSERT INTO users (name) VALUES ($1)`, [req.body.name])
+    db.query(`INSERT INTO stories (story) VALUES ($1)`, [req.body.story])
       .then(response => {
-        res.json({name:req.body.name})
+        res.json({name:req.body.story})
       })
+      .catch(err => console.log('Create story erro', err.message));
   })
 
   return router;
