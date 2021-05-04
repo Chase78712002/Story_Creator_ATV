@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const storyLitRoutes = (db) => {
-  // GET /storyList
+const newStoryRoutes = (db) => {
+  // GET /new_story
   router.get("/", (req, res) => {
-    res.render("storyList");
+    res.render("new_story");
   });
 
 
@@ -12,4 +12,4 @@ const storyLitRoutes = (db) => {
 }
 
 
-module.exports = storyLitRoutes;
+module.exports = newStoryRoutes;
