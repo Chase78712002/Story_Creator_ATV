@@ -5,6 +5,7 @@ $(() => {
       status = "Completed";
     }
     const $storyElem = $(`
+    <a href= "/story/${storyObj.id}"> view story </a>
       <article class="view-story">
         <div class="story-header" id=${storyObj.id}>
           <h3>${storyObj.name}</h3>
@@ -21,6 +22,7 @@ $(() => {
       <article class="story-contribution">
         <div>
           <h3>${contribObj.name}</h3>
+          <button class=${className}>
         </div>
         <p>${contribObj.contribution}</p>
         <div class="contribution-footer">
@@ -54,6 +56,7 @@ $(() => {
         method: "GET",
         url: `/story/${story_id}`,
       }).done((story) => {
+        // check if the writer_id === session cookie id
         renderStory(story, "body", createStoryElem);
 
         $.ajax({
