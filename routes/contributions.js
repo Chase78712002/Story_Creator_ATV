@@ -4,13 +4,13 @@ const router = express.Router();
 const contributionsRoutes = (db) => {
 
   // GET /contribution
-  router.get("/", (req, res) => {
-    console.log(req.body);
-    // db.query("SELECT * FROM contributions WHERE story_id = $1 ", [])
-    //   .then(response => {
+  router.get("/:story_id", (req, res) => {
 
-    //   })
-    //   .catch(err => console.log('Get contributions error', err.message));
+    db.query("SELECT * FROM contributions WHERE story_id = $1 ", [req.params.story_id])
+      .then(response => {
+        res.json(response.rows);
+      })
+      .catch(err => console.log('Get contributions error', err.message));
   });
 
   // POST /contribution/:id

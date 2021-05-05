@@ -17,9 +17,17 @@ $(() => {
     return $storyElem;
   };
 
-  const renderStory = (storiesArr, tagName) => {
+  const createContributionElem = (contribObj) => {
+
+    const $contribElem = $(`
+      <p>${contribObj.contribution}</p>
+    `)
+    return $contribElem;
+  }
+
+  const renderStory = (storiesArr, tagName, cb) => {
     for (story of storiesArr) {
-      const $story = createStoryElem(story);
+      const $story = cb(story);
       $(`${tagName}`).append($story);
     }
   }
@@ -28,7 +36,7 @@ $(() => {
     method: "GET",
     url: "/story",
   }).done(function(stories) {
-    renderStory(stories, ".container");
+    renderStory(stories, ".container", createStoryElem);
 
     $(".story").click(function() {
       const story_id = $(this).children().attr('id');
@@ -39,15 +47,15 @@ $(() => {
         method: "GET",
         url: `/story/${story_id}`
       }).done(story=> {
-        renderStory(story,"body");
+        renderStory(story,"body", createStoryElem);
       })
+
 
       $.ajax({
         method: "GET",
-        url: '/contribution',
-        data: {storyId:story_id}
+        url: `/contribution/${story_id}`,
       }).done(contributions => {
-        renderStory(contributions, "body");
+        renderStory(contributions, "body", createContributionElem);
       })
 
 
