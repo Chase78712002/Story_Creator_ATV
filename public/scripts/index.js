@@ -5,7 +5,7 @@ $(() => {
       status = "Completed";
     }
     const $storyElem = $(`
-      <article class="story">
+      <article class="view-story">
         <div class="story-header" id=${storyObj.id}>
           <h3>${storyObj.name}</h3>
           <h3>${status}</h3>
@@ -45,7 +45,7 @@ $(() => {
   }).done(function (stories) {
     renderStory(stories, ".container", createStoryElem);
 
-    $(".story").click(function () {
+    $(".view-story").click(function () {
       const story_id = $(this).children().attr("id");
 
       $(".container").remove();
@@ -55,6 +55,7 @@ $(() => {
         url: `/story/${story_id}`,
       }).done((story) => {
         renderStory(story, "body", createStoryElem);
+        $("body").append("<h2>Contributions</h2>");
       });
 
       $.ajax({
@@ -64,7 +65,6 @@ $(() => {
         renderStory(contributions, "body", createContributionElem);
       });
 
-      $("body").append("<p>Hi there!!</p>");
     });
   });
 });
