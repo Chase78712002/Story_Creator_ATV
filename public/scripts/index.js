@@ -1,3 +1,4 @@
+
 $(() => {
   const createStoryElem = (storyObj) => {
     let status = 'In progress';
@@ -5,15 +6,13 @@ $(() => {
       status = 'Completed';
     }
     const $storyElem = $(`
-    <a href="/story/${storyObj.id}">
       <article class="story">
-        <div class="story-header">
+        <div class="story-header" id=${storyObj.id}>
           <h3>${storyObj.name}</h3>
           <h3>${status}</h3>
         </div>
         <div class="story-title">${storyObj.story}</div>
       </article>
-    </a>
     `);
     return $storyElem;
   };
@@ -25,20 +24,39 @@ $(() => {
     }
   }
 
-
   $.ajax({
     method: "GET",
     url: "/story",
-  }).done((stories) => {
+  }).done(function(stories) {
     renderStory(stories, ".container");
+
+    $(".story").click(function() {
+      const story_id = $(this).children().attr('id');
+
+      $(".container").remove();
+
+      $.ajax({
+        method: "GET",
+        url: `/story/${story_id}`
+      }).done(story=> {
+        renderStory(story,"body");
+      })
+
+      $.ajax({
+        method: "GET",
+        url: '/contribution',
+        data: {storyId:story_id}
+      }).done(contributions => {
+        renderStory(contributions, "body");
+      })
+
+
+      $("body").append('<p>Hi there!!</p>');
+
+    })
+
   });
 
-  // $.ajax({
-  //   method: "GET",
-  //   ulr: "/story/:id",
-  // }).then(story => {
-  //   console.log(story);
-  // })
 
 
 });
