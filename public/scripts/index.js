@@ -1,9 +1,8 @@
-
 $(() => {
   const createStoryElem = (storyObj) => {
-    let status = 'In progress';
+    let status = "In progress";
     if (storyObj.complete) {
-      status = 'Completed';
+      status = "Completed";
     }
     const $storyElem = $(`
       <article class="story">
@@ -18,53 +17,54 @@ $(() => {
   };
 
   const createContributionElem = (contribObj) => {
-
     const $contribElem = $(`
-      <p>${contribObj.contribution}</p>
-    `)
+      <article class="story-contribution">
+        <div>
+          <h3>${contribObj.name}</h3>
+        </div>
+        <p>${contribObj.contribution}</p>
+        <div class="contribution-footer">
+          <a href=""><i class="far fa-thumbs-up"></i></a>
+          <p>Votes: ${contribObj.vote}</p>
+        </div>
+      </article>
+    `);
     return $contribElem;
-  }
+  };
 
   const renderStory = (storiesArr, tagName, cb) => {
     for (story of storiesArr) {
       const $story = cb(story);
       $(`${tagName}`).append($story);
     }
-  }
+  };
 
   $.ajax({
     method: "GET",
     url: "/story",
-  }).done(function(stories) {
+  }).done(function (stories) {
     renderStory(stories, ".container", createStoryElem);
 
-    $(".story").click(function() {
-      const story_id = $(this).children().attr('id');
+    $(".story").click(function () {
+      const story_id = $(this).children().attr("id");
 
       $(".container").remove();
 
       $.ajax({
         method: "GET",
-        url: `/story/${story_id}`
-      }).done(story=> {
-        renderStory(story,"body", createStoryElem);
-      })
-
+        url: `/story/${story_id}`,
+      }).done((story) => {
+        renderStory(story, "body", createStoryElem);
+      });
 
       $.ajax({
         method: "GET",
         url: `/contribution/${story_id}`,
-      }).done(contributions => {
+      }).done((contributions) => {
         renderStory(contributions, "body", createContributionElem);
-      })
+      });
 
-
-      $("body").append('<p>Hi there!!</p>');
-
-    })
-
+      $("body").append("<p>Hi there!!</p>");
+    });
   });
-
-
-
 });

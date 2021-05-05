@@ -7,6 +7,6 @@ CREATE TABLE contributions (
   story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE,
   contribution VARCHAR(1000) NOT NULL,
   date_created TIMESTAMP DEFAULT NOW(),
-  vote INTEGER,
+  vote INTEGER DEFAULT 0,
   accepted BOOLEAN DEFAULT false
 );
