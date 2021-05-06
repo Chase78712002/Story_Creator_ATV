@@ -18,7 +18,7 @@
   <%console.log("Contributions Array: ", contributionArr)%>
 
   <main class="container">
-    <article class="view-story">
+    <article class="view-story" id="<%= storyObj.id %>">
       <div class="story-header">
         <h3><%=storyObj.name%></h3>
         <h3><%=status%></h3>
@@ -40,7 +40,7 @@
     <h2>Contributions</h2>
     <div class="container">
       <%for (const contribution of contributionArr) { %>
-        <article class="story-contribution" id= "<%= contribution.id %>" >
+        <article class="story-contribution" id= "contribID_<%= contribution.id %>" >
           <p class="contribution-body"><%=contribution.contribution%></p>
           <div class="contribution-footer">
             <a href=""><i class="far fa-thumbs-up"></i></a>
