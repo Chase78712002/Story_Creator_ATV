@@ -15,9 +15,19 @@ const storyRoutes = (db) => {
   // GET /story/:id
   router.get('/:id', (req,res) => {
     console.log(req.session);
-    db.query('SELECT * FROM stories JOIN writers ON writers.id = writer_id WHERE writer_id = $1;', [req.params.id])
+    const queryString = `
+    SELECT *
+    FROM stories
+    JOIN writers ON writers.id = writer_id
+    JOIN contributions ON stories.id = story_id
+    WHERE stories.writer_id = $1
+    `;
+    db.query(queryString, [req.params.id])
       .then(response => {
-        res.render("story");
+        const templateVar = {
+          storyObj: response.rows
+        }
+        res.render("story", templateVar);
       })
       .catch(err => console.log('View specific story error', err.message))
   });

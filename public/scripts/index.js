@@ -67,6 +67,10 @@ $(() => {
         });
       });
 
+      $(".accept-contribution").click(function(event){
+        event.preventDefault()
+      })
+
 
       $("body").append("<p>Hi there!!</p>");
     });
