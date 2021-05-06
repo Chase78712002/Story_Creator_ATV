@@ -4,7 +4,7 @@ $(() => {
   $("form").submit(function(event) {
     event.preventDefault();
     const queryString = $(this).siblings(".contribution-body").html();
-    const contribID = $(".story-contribution").attr("id");
+    const contribID = $(this).parent(".story-contribution").attr("id");
     const storyID = $(".view-story").attr("id");
     console.log('view-story id in ajax', storyID);
     $.ajax({
