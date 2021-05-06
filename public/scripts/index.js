@@ -12,6 +12,7 @@ $(() => {
           <h3>${status}</h3>
         </div>
         <div class="story-content">${storyObj.story}</div>
+        <a href= "/story/${storyObj.id}"><p class="story-footer">View Story</a>
       </article>
     `);
     return $storyElem;
@@ -47,6 +48,27 @@ $(() => {
   }).done(function (stories) {
     renderStory(stories, ".container", createStoryElem);
 
+<<<<<<< HEAD
+    $(".view-story").click(function () {
+      const story_id = $(this).children().attr("id");
+
+      // $(".container").remove();
+
+      // $.ajax({
+      //   method: "GET",
+      //   url: `/story/${story_id}`,
+      // }).done((story) => {
+      //   // check if the writer_id === session cookie id
+      //   renderStory(story, "body", createStoryElem);
+
+      //   $.ajax({
+      //     method: "GET",
+      //     url: `/contribution/${story_id}`,
+      //   }).done((contributions) => {
+      //     renderStory(contributions, "body", createContributionElem);
+      //   });
+      // });
+=======
     // $(".view-story").click(function () {
     //   const story_id = $(this).children().attr("id");
 
@@ -58,6 +80,7 @@ $(() => {
     //   }).done((story) => {
     //     // check if the writer_id === session cookie id
     //     renderStory(story, "body", createStoryElem);
+>>>>>>> master
 
     //     $.ajax({
     //       method: "GET",
@@ -67,6 +90,11 @@ $(() => {
     //     });
     //   });
 
+<<<<<<< HEAD
+      // $("body").append("<p>Hi there!!</p>");
+    });
+=======
     // });
+>>>>>>> master
   });
 });
