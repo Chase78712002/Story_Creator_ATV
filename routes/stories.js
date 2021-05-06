@@ -14,10 +14,15 @@ const storyRoutes = (db) => {
 
   // GET /story/:id
   router.get('/:id', (req,res) => {
-    console.log(req.session);
-    db.query('SELECT * FROM stories JOIN writers ON writers.id = writer_id WHERE writer_id = $1;', [req.params.id])
+    console.log("Session obj: ", req.session.user_id);
+    db.query('SELECT * FROM stories JOIN writers ON writers.id = writer_id JOIN contributions ON stories.id = story_id WHERE stories.writer_id = $1;', [req.params.id])
       .then(response => {
-        res.render("story");
+        const templateVars = {
+          storyObj: response.rows[0],
+          contributionArr: response.rows,
+          sessionId: req.session.user_id
+        };
+        res.render("story", templateVars);
       })
       .catch(err => console.log('View specific story error', err.message))
   });

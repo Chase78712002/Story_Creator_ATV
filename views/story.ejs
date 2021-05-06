@@ -10,27 +10,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/contribution.js"></script>
   </head>
 <body>
   <!-- <%- include("partials/_header") %> -->
-  <nav>
-    <img src="/images/logo.png" id="logo" width="400" height="60" />
-    <div class="nav right">
-      <a href="/">Home</a>
-      <i class="fas fa-book-open"></i>
-      <a href="/new_story">Create Story</a>
-      <i class="fas fa-book-open"></i>
-      <p>USER</p>
-    </div>
-  </nav>
+  <%console.log("Story object: ", storyObj)%>
+  <%console.log("Contributions Array: ", contributionArr)%>
+
   <main class="container">
     <article class="view-story">
       <div class="story-header">
-        <h3>Test Author</h3>
-        <h3>Test Status</h3>
+        <h3><%=storyObj.name%></h3>
+        <h3><%=storyObj.complete%></h3>
       </div>
-      <div class="story-content">This is a test story</div>
+      <!-- <div class="story-content"><%=storyObj.story%></div> -->
+      <div class="story-content"><%=sessionId%></div>
     </article>
     <div id="new-contribution">
       <h2>Contribute to This Story</h2>
@@ -45,18 +39,24 @@
     </div>
     <h2>Contributions</h2>
     <div class="container">
-      <article class="story-contribution">
-        <div>
-          <h3>Test Author</h3>
-        </div>
-        <p>This is a test contribution</p>
-        <div class="contribution-footer">
-          <a href=""><i class="far fa-thumbs-up"></i></a>
-          <p>Votes: num</p>
-        </div>
-      </article>
+      <%for (const contribution of contributionArr) { %>
+        <article class="story-contribution">
+          <p class="contribution-body"><%=contribution.contribution%></p>
+          <div class="contribution-footer">
+            <a href=""><i class="far fa-thumbs-up"></i></a>
+            <p>Votes:<%=contribution.vote%></p>
+          </div>
+          <%if (Number(sessionId) === storyObj.writer_id) { %>
+            <form class="accept-contribution">
+              <option>Hello World</option>
+              <button type="submit">Accept</button>
+            </form>
+          <%}%>
+        </article>
+      <%}%>
 
     </div>
+
   </main>
 
 </body>
