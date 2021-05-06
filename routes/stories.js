@@ -14,7 +14,6 @@ const storyRoutes = (db) => {
   // GET /story/:id
   router.get("/:id", (req, res) => {
     console.log("Session obj: ", req.session.user_id);
-<<<<<<< HEAD
     db.query('SELECT * FROM stories JOIN writers ON writers.id = writer_id JOIN contributions ON stories.id = story_id WHERE stories.writer_id = $1;', [req.params.id])
       .then(response => {
         let statusVal = 'In Progress';
@@ -22,21 +21,11 @@ const storyRoutes = (db) => {
           statusVal = 'Completed'
         }
 
-=======
-    db.query(
-      "SELECT * FROM stories JOIN writers ON writers.id = writer_id JOIN contributions ON stories.id = story_id WHERE stories.writer_id = $1;",
-      [req.params.id]
-    )
-      .then((response) => {
->>>>>>> master
         const templateVars = {
           storyObj: response.rows[0],
           contributionArr: response.rows,
           sessionId: req.session.user_id,
-<<<<<<< HEAD
           status: statusVal
-=======
->>>>>>> master
         };
         res.render("story", templateVars);
       })
