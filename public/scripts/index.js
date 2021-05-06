@@ -17,22 +17,22 @@ $(() => {
     return $storyElem;
   };
 
-  const createContributionElem = (contribObj) => {
-    const $contribElem = $(`
-      <article class="story-contribution">
-        <div>
-          <h3>${contribObj.name}</h3>
-          <button class=${className}>
-        </div>
-        <p>${contribObj.contribution}</p>
-        <div class="contribution-footer">
-          <a href=""><i class="far fa-thumbs-up"></i></a>
-          <p>Votes: ${contribObj.vote}</p>
-        </div>
-      </article>
-    `);
-    return $contribElem;
-  };
+  // const createContributionElem = (contribObj) => {
+  //   const $contribElem = $(`
+  //     <article class="story-contribution">
+  //       <div>
+  //         <h3>${contribObj.name}</h3>
+  //         <button class=${className}>
+  //       </div>
+  //       <p>${contribObj.contribution}</p>
+  //       <div class="contribution-footer">
+  //         <a href=""><i class="far fa-thumbs-up"></i></a>
+  //         <p>Votes: ${contribObj.vote}</p>
+  //       </div>
+  //     </article>
+  //   `);
+  //   return $contribElem;
+  // };
 
   const renderStory = (storiesArr, tagName, cb) => {
     for (story of storiesArr) {
@@ -47,32 +47,26 @@ $(() => {
   }).done(function (stories) {
     renderStory(stories, ".container", createStoryElem);
 
-    $(".view-story").click(function () {
-      const story_id = $(this).children().attr("id");
+    // $(".view-story").click(function () {
+    //   const story_id = $(this).children().attr("id");
 
-      $(".container").remove();
+    //   $(".container").remove();
 
-      $.ajax({
-        method: "GET",
-        url: `/story/${story_id}`,
-      }).done((story) => {
-        // check if the writer_id === session cookie id
-        renderStory(story, "body", createStoryElem);
+    //   $.ajax({
+    //     method: "GET",
+    //     url: `/story/${story_id}`,
+    //   }).done((story) => {
+    //     // check if the writer_id === session cookie id
+    //     renderStory(story, "body", createStoryElem);
 
-        $.ajax({
-          method: "GET",
-          url: `/contribution/${story_id}`,
-        }).done((contributions) => {
-          renderStory(contributions, "body", createContributionElem);
-        });
-      });
+    //     $.ajax({
+    //       method: "GET",
+    //       url: `/contribution/${story_id}`,
+    //     }).done((contributions) => {
+    //       renderStory(contributions, "body", createContributionElem);
+    //     });
+    //   });
 
-      $(".accept-contribution").click(function(event){
-        event.preventDefault()
-      })
-
-
-      $("body").append("<p>Hi there!!</p>");
-    });
+    // });
   });
 });
