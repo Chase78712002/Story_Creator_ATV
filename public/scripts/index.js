@@ -5,12 +5,13 @@ $(() => {
       status = "Completed";
     }
     const $storyElem = $(`
-      <article class="story">
+    <a href= "/story/${storyObj.id}"> view story </a>
+      <article class="view-story">
         <div class="story-header" id=${storyObj.id}>
           <h3>${storyObj.name}</h3>
           <h3>${status}</h3>
         </div>
-        <div class="story-title">${storyObj.story}</div>
+        <div class="story-content">${storyObj.story}</div>
       </article>
     `);
     return $storyElem;
@@ -21,6 +22,7 @@ $(() => {
       <article class="story-contribution">
         <div>
           <h3>${contribObj.name}</h3>
+          <button class=${className}>
         </div>
         <p>${contribObj.contribution}</p>
         <div class="contribution-footer">
@@ -45,7 +47,7 @@ $(() => {
   }).done(function (stories) {
     renderStory(stories, ".container", createStoryElem);
 
-    $(".story").click(function () {
+    $(".view-story").click(function () {
       const story_id = $(this).children().attr("id");
 
       $(".container").remove();
@@ -54,15 +56,17 @@ $(() => {
         method: "GET",
         url: `/story/${story_id}`,
       }).done((story) => {
+        // check if the writer_id === session cookie id
         renderStory(story, "body", createStoryElem);
+
+        $.ajax({
+          method: "GET",
+          url: `/contribution/${story_id}`,
+        }).done((contributions) => {
+          renderStory(contributions, "body", createContributionElem);
+        });
       });
 
-      $.ajax({
-        method: "GET",
-        url: `/contribution/${story_id}`,
-      }).done((contributions) => {
-        renderStory(contributions, "body", createContributionElem);
-      });
 
       $("body").append("<p>Hi there!!</p>");
     });
