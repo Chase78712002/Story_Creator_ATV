@@ -17,10 +17,16 @@ const storyRoutes = (db) => {
     console.log("Session obj: ", req.session.user_id);
     db.query('SELECT * FROM stories JOIN writers ON writers.id = writer_id JOIN contributions ON stories.id = story_id WHERE stories.writer_id = $1;', [req.params.id])
       .then(response => {
+        let statusVal = 'In Progress';
+        if(response.rows[0].complete) {
+          statusVal = 'Completed'
+        }
+
         const templateVars = {
           storyObj: response.rows[0],
           contributionArr: response.rows,
-          sessionId: req.session.user_id
+          sessionId: req.session.user_id,
+          status: statusVal
         };
         res.render("story", templateVars);
       })

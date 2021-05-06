@@ -13,7 +13,7 @@
     <script type="text/javascript" src="/scripts/contribution.js"></script>
   </head>
 <body>
-  <!-- <%- include("partials/_header") %> -->
+  <%- include("partials/_header") %>
   <%console.log("Story object: ", storyObj)%>
   <%console.log("Contributions Array: ", contributionArr)%>
 
@@ -21,10 +21,10 @@
     <article class="view-story">
       <div class="story-header">
         <h3><%=storyObj.name%></h3>
-        <h3><%=storyObj.complete%></h3>
+        <h3><%=status%></h3>
       </div>
       <!-- <div class="story-content"><%=storyObj.story%></div> -->
-      <div class="story-content"><%=sessionId%></div>
+      <div class="story-content"><%=storyObj.story%></div>
     </article>
     <div id="new-contribution">
       <h2>Contribute to This Story</h2>
