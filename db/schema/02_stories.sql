@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS stories CASCADE;
 CREATE TABLE stories (
   id SERIAL PRIMARY KEY NOT NULL,
   writer_id INTEGER REFERENCES writers(id) ON DELETE CASCADE,
-  story VARCHAR(1000),
+  story VARCHAR(10000),
   date_created TIMESTAMP DEFAULT NOW(),
   vote INTEGER,
   complete BOOLEAN DEFAULT false

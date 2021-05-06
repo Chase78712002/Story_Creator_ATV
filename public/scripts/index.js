@@ -48,17 +48,25 @@ $(() => {
   }).done(function (stories) {
     renderStory(stories, ".container", createStoryElem);
 
-    // $(".view-story").click(function () {
-    //   const story_id = $(this).children().attr("id");
+    $(".view-story").click(function () {
+      const story_id = $(this).children().attr("id");
 
-    //   $(".container").remove();
+      // $(".container").remove();
 
-    //   $.ajax({
-    //     method: "GET",
-    //     url: `/story/${story_id}`,
-    //   }).done((story) => {
-    //     // check if the writer_id === session cookie id
-    //     renderStory(story, "body", createStoryElem);
+      // $.ajax({
+      //   method: "GET",
+      //   url: `/story/${story_id}`,
+      // }).done((story) => {
+      //   // check if the writer_id === session cookie id
+      //   renderStory(story, "body", createStoryElem);
+
+      //   $.ajax({
+      //     method: "GET",
+      //     url: `/contribution/${story_id}`,
+      //   }).done((contributions) => {
+      //     renderStory(contributions, "body", createContributionElem);
+      //   });
+      // });
 
     //     $.ajax({
     //       method: "GET",
@@ -68,6 +76,7 @@ $(() => {
     //     });
     //   });
 
-    // });
+      // $("body").append("<p>Hi there!!</p>");
+    });
   });
 });

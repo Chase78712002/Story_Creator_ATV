@@ -49,7 +49,7 @@ const storyRoutes = (db) => {
       .then((response) => {
         res.json({
           contribution: req.body.contribution_data,
-          id: req.params.id,
+          contrib_id: req.body.contribution_id,
         });
       })
       .catch((err) => console.log("Edit story error", err.message));

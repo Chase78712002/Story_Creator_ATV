@@ -40,7 +40,7 @@
     <h2>Contributions</h2>
     <div class="container">
       <%for (const contribution of contributionArr) { %>
-        <article class="story-contribution">
+        <article class="story-contribution" id= "<%= contribution.id %>" >
           <p class="contribution-body"><%=contribution.contribution%></p>
           <div class="contribution-footer">
             <a href=""><i class="far fa-thumbs-up"></i></a>
