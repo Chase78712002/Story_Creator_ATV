@@ -47,8 +47,7 @@
             <p>Votes:<%=contribution.vote%></p>
           </div>
           <%if (Number(sessionId) === storyObj.writer_id) { %>
-            <form class="accept-contribution">
-              <option>Hello World</option>
+            <form>
               <button type="submit">Accept</button>
             </form>
           <%}%>
