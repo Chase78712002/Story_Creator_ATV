@@ -33,10 +33,19 @@ const contributionsRoutes = (db) => {
 
   // POST contribution/vote/:id
   router.post("/vote/:id", (req, res) => {
-    db.query(`
-
-    `)
-  })
+    // increase the vote column for that specific contribution by 1
+    db.query(
+      `
+      UPDATE contributions
+      SET vote = vote + 1
+      WHERE id = $1
+    `,
+      [req.params.id]
+    )
+    .then(response => {
+      res.json(response);
+    })
+  });
 
   return router;
 }

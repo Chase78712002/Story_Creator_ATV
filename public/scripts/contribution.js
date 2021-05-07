@@ -31,13 +31,21 @@ $(() => {
     })
   });
 
-  $(".far-fa-thumbs-up").click(function() {
-    alert("vote is clicked!!");
-    // everytime it is clicked
+  $(".fa-thumbs-up").click(function() {
+    const contribID = $(this).parents(".story-contribution").attr("id");
+    const storyID = $(".view-story").attr("id");
+    let parsedID = contribID.split("_")[1];
+    console.log("Parsed ID: ", parsedID);
     // update the database
-      // increase the vote column for that specific contribution by 1
+    $.ajax({
+      method: "POST",
+      url: `/contribution/vote/${parsedID}`,
+    }).done(response => {
+      console.log(response);
+      // refresh the page
+      window.location.href = `/story/${storyID}`;
+    })
 
-    // refresh the page
   })
 
 })
