@@ -18,6 +18,7 @@ $(() => {
       console.log(response);
       console.log(response.contrib_id);
       $(`#${response.contrib_id}`).slideUp();
+
     })
   });
 })
