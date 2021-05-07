@@ -25,11 +25,20 @@ $(() => {
         method: "POST",
         url: `/contribution/${parsedID}`
       }).done(response => {
-        // Put something later?
+        console.log(response);
       })
 
     })
   });
+
+  $(".far-fa-thumbs-up").click(function() {
+    alert("vote is clicked!!");
+    // everytime it is clicked
+    // update the database
+      // increase the vote column for that specific contribution by 1
+
+    // refresh the page
+  })
 
 })
 

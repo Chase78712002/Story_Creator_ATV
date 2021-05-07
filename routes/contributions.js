@@ -16,15 +16,20 @@ const contributionsRoutes = (db) => {
 
   // POST contribution/create-contribution/:id
   router.post("/create-contribution/:story_id", (req, res) => {
-    db.query(`
+    console.log(req.params.story_id);
+    db.query(
+      `
     INSERT INTO contributions (writer_id, story_id, contribution)
-    VALUES
-    (${req.session.user_id}, ${req.params.story_id}, ${req.body})
-    `).then(response => {
-      console.log("Req.body: ", response.body);
-    })
-    .catch(err => console.log('Create contribution error', err.message));
-  })
+    VALUES ($1, $2, $3)
+    `,
+      [req.session.user_id, req.params.story_id, req.body.story]
+    )
+      .then((response) => {
+        console.log("Req.body: ", req.body.story);
+        res.redirect(`/story/${req.params.story_id}`);
+      })
+      .catch((err) => console.log("Create contribution error", err.message));
+  });
 
   // POST contribution/vote/:id
   router.post("/vote/:id", (req, res) => {
