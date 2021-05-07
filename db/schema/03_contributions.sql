@@ -1,5 +1,4 @@
 -- Drop and recreate Widgets table (Example)
-
 DROP TABLE IF EXISTS contributions CASCADE;
 CREATE TABLE contributions (
   id SERIAL PRIMARY KEY NOT NULL,
