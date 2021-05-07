@@ -5,7 +5,6 @@ $(() => {
       status = "Completed";
     }
     const $storyElem = $(`
-    <a href= "/story/${storyObj.id}"> view story </a>
       <article class="view-story">
         <div class="story-header" id=${storyObj.id}>
           <h3>${storyObj.name}</h3>
@@ -48,8 +47,8 @@ $(() => {
   }).done(function (stories) {
     renderStory(stories, ".container", createStoryElem);
 
-    $(".view-story").click(function () {
-      const story_id = $(this).children().attr("id");
+    // $(".view-story").click(function () {
+    //   const story_id = $(this).children().attr("id");
 
       // $(".container").remove();
 
@@ -77,6 +76,6 @@ $(() => {
     //   });
 
       // $("body").append("<p>Hi there!!</p>");
-    });
+    // });
   });
 });

@@ -19,8 +19,8 @@ $(() => {
       console.log(response.contrib_id);
       let parsedID = contribID.split("_")[1];
       console.log("Parsed ID: ", typeof parsedID);
-      // $(`#${response.contrib_id}`).slideUp();
-      // window.location.href = `/story/${storyID}`;
+      $(`#${response.contrib_id}`).slideUp();
+      window.location.href = `/story/${storyID}`;
       $.ajax({
         method: "POST",
         url: `/contribution/${parsedID}`

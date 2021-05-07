@@ -14,22 +14,22 @@
   </head>
 <body>
   <%- include("partials/_header") %>
-  <%console.log("Story object: ", storyObj)%>
+  <%console.log("Story object: ", storyOBJ1)%>
   <%console.log("Contributions Array: ", contributionArr)%>
 
   <main class="container">
-    <article class="view-story" id="<%= storyObj.id %>">
+    <article class="view-story" id="<%= storyId %>">
       <div class="story-header">
-        <h3><%=storyObj.name%></h3>
+        <h3><%=storyOBJ1.name%></h3>
         <h3>hello</h3>
       </div>
-      <!-- <div class="story-content"><%=storyObj.story%></div> -->
-      <div class="story-content"><%=storyObj.story%></div>
+      <!-- <div class="story-content"><%=storyOBJ1.story%></div> -->
+      <div class="story-content"><%=storyOBJ1.story%></div>
     </article>
     <div id="new-contribution">
       <h2>Contribute to This Story</h2>
       <section>
-        <form class="create-contribution" action="/contribution/create-contribution/<%=storyObj.id%>" method="POST">
+        <form class="create-contribution" action="/contribution/create-contribution/<%=storyOBJ1.id%>" method="POST">
           <textarea name="story" id="story-text"></textarea>
           <div>
             <button type="submit" class="button">Submit</button>
@@ -46,7 +46,7 @@
             <a href=""><i class="far fa-thumbs-up"></i></a>
             <p>Votes:<%=contribution.vote%></p>
           </div>
-          <%if (Number(sessionId) === storyObj.writer_id) { %>
+          <%if (Number(sessionId) === storyOBJ1.writer_id) { %>
             <form class="accept">
               <button type="submit">Accept</button>
             </form>

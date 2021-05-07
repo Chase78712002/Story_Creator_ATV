@@ -14,30 +14,58 @@ const storyRoutes = (db) => {
   // GET /story/:id
   router.get("/:id", (req, res) => {
     console.log("req.session.user_id: ", req.session.user_id);
+    // story query
     db.query(
-      "SELECT * FROM stories JOIN writers ON writers.id = writer_id JOIN contributions ON stories.id = story_id WHERE stories.writer_id = $1;",
+      `
+      SELECT stories.id, writer_id, story, complete, name
+      FROM stories
+      JOIN writers ON writers.id = writer_id
+      WHERE writer_id = $1;
+      `,
       [req.params.id]
     )
       .then((response) => {
-        // let statusVal = "In progress";
-        // if (response.rows[0].complete) {
-        //   statusVal = "complete"
-        // };
-
+        console.log("story query response.rows", response.rows);
         const templateVars = {
           storyObj: response.rows[0],
-          contributionArr: response.rows,
           sessionId: req.session.user_id,
-          // status: statusVal
+          storyId: req.params.id
         };
-        console.log("response.rows[0].writer_id ", response.rows[0].writer_id);
-        res.render("story", templateVars);
+        return templateVars;
+      })
+      .then(response => {
+        console.log('response.storyObj: ', response.storyObj);
+        console.log('response.sessionID: ', response.sessionId);
+        console.log('response.storyId: ', response.storyId);
+        const storyVars = response.storyObj;
+        const sessionVars = response.sessionId;
+        const storyIdVars = response.storyId;
+        // contribution query
+        db.query(
+          `
+            SELECT id, writer_id, story_id, contribution, vote, accepted
+            FROM contributions
+            WHERE story_id = $1;
+          `,
+          [req.params.id]
+        ).then((response) => {
+          console.log("contribution query response.rows", response.rows);
+          // use the response to render the story.ejs page
+          const templateVars = {
+            storyOBJ1: storyVars,
+            sessionId: sessionVars,
+            storyId: storyIdVars,
+            contributionArr: response.rows,
+          };
+          res.render("story", templateVars);
+        })
+
       })
       .catch((err) => console.log("View specific story error", err.message));
   });
 
   // PUT /story/:id
-  router.put("/:id", (req, res) => {
+  router.post("/:id", (req, res) => {
     console.log("data type req.body: ", typeof req.body.contribution_data);
     db.query(
       `
