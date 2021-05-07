@@ -4,8 +4,13 @@ const router = express.Router();
 const storyRoutes = (db) => {
   // GET /story
   router.get("/", (req, res) => {
-    db.query("SELECT * FROM stories JOIN writers ON writers.id = writer_id;")
+    db.query(`
+    SELECT stories.id, writer_id, story, vote, complete, name
+    FROM stories
+    JOIN writers ON writers.id = writer_id;
+    `)
       .then((response) => {
+        console.log('response.rows: ', response.rows)
         res.json(response.rows);
       })
       .catch((err) => console.log("View stories error", err.message));
@@ -20,7 +25,7 @@ const storyRoutes = (db) => {
       SELECT stories.id, writer_id, story, complete, name
       FROM stories
       JOIN writers ON writers.id = writer_id
-      WHERE writer_id = $1;
+      WHERE stories.id = $1;
       `,
       [req.params.id]
     )
@@ -29,14 +34,14 @@ const storyRoutes = (db) => {
         const templateVars = {
           storyObj: response.rows[0],
           sessionId: req.session.user_id,
-          storyId: req.params.id
+          storyId: req.params.id,
         };
         return templateVars;
       })
-      .then(response => {
-        console.log('response.storyObj: ', response.storyObj);
-        console.log('response.sessionID: ', response.sessionId);
-        console.log('response.storyId: ', response.storyId);
+      .then((response) => {
+        console.log("response.storyObj: ", response.storyObj);
+        console.log("response.sessionID: ", response.sessionId);
+        console.log("response.storyId: ", response.storyId);
         const storyVars = response.storyObj;
         const sessionVars = response.sessionId;
         const storyIdVars = response.storyId;
@@ -58,8 +63,7 @@ const storyRoutes = (db) => {
             contributionArr: response.rows,
           };
           res.render("story", templateVars);
-        })
-
+        });
       })
       .catch((err) => console.log("View specific story error", err.message));
   });

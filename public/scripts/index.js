@@ -45,6 +45,7 @@ $(() => {
     method: "GET",
     url: "/story",
   }).done(function (stories) {
+    console.log('story in ajax ', stories);
     renderStory(stories, ".container", createStoryElem);
 
     // $(".view-story").click(function () {
