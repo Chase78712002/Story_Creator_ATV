@@ -11,7 +11,7 @@ $(() => {
           <h3>${status}</h3>
         </div>
         <div class="story-content">${storyObj.story}</div>
-        <a href= "/story/${storyObj.id}"><p class="story-footer">View Story</a>
+        <a href= "story/${storyObj.id}"><p class="story-footer">View Story</a>
       </article>
     `);
     return $storyElem;
@@ -35,8 +35,8 @@ $(() => {
   // };
 
   const renderStory = (storiesArr, tagName, cb) => {
-    for (story of storiesArr) {
-      const $story = cb(story);
+    for (let i = storiesArr.length - 1; i >= 0; i--) {
+      const $story = cb(storiesArr[i]);
       $(`${tagName}`).append($story);
     }
   };

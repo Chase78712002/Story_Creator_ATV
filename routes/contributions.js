@@ -26,6 +26,13 @@ const contributionsRoutes = (db) => {
     .catch(err => console.log('Create contribution error', err.message));
   })
 
+  // POST contribution/vote/:id
+  router.post("/vote/:id", (req, res) => {
+    db.query(`
+
+    `)
+  })
+
   return router;
 }
 
