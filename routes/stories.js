@@ -13,23 +13,24 @@ const storyRoutes = (db) => {
 
   // GET /story/:id
   router.get("/:id", (req, res) => {
-    console.log("Session obj: ", req.session.user_id);
+    console.log("req.session.user_id: ", req.session.user_id);
     db.query(
       "SELECT * FROM stories JOIN writers ON writers.id = writer_id JOIN contributions ON stories.id = story_id WHERE stories.writer_id = $1;",
       [req.params.id]
     )
       .then((response) => {
-        let statusVal = "In progress";
-        if (response.rows[0].complete) {
-          statusVal = "complete"
-        };
+        // let statusVal = "In progress";
+        // if (response.rows[0].complete) {
+        //   statusVal = "complete"
+        // };
 
         const templateVars = {
           storyObj: response.rows[0],
           contributionArr: response.rows,
           sessionId: req.session.user_id,
-          status: statusVal
+          // status: statusVal
         };
+        console.log("response.rows[0].writer_id ", response.rows[0].writer_id);
         res.render("story", templateVars);
       })
       .catch((err) => console.log("View specific story error", err.message));
