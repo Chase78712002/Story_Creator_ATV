@@ -43,7 +43,7 @@
         <article class="story-contribution" id= "contribID_<%= contribution.id %>" >
           <p class="contribution-body"><%=contribution.contribution%></p>
           <div class="contribution-footer">
-            <a href=""><i class="far fa-thumbs-up"></i></a>
+            <i class="far fa-thumbs-up" id="vote-button"></i>
             <p>Votes:<%=contribution.vote%></p>
           </div>
           <%if (Number(sessionId) === storyOBJ1.writer_id) { %>
