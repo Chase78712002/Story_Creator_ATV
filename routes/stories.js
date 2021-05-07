@@ -23,7 +23,7 @@ const storyRoutes = (db) => {
         // if (response.rows[0].complete) {
         //   statusVal = "complete"
         // };
-
+        console.log("response ", response.rows[0]);
         const templateVars = {
           storyObj: response.rows[0],
           contributionArr: response.rows,
